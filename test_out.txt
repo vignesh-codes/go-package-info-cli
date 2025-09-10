@@ -1,0 +1,108 @@
+==> Running tests...
+go test ./... -v -cover
+	github.com/canonical-dev/package_statistics/cmd/package_statistics		coverage: 0.0% of statements
+=== RUN   TestExpandPath
+--- PASS: TestExpandPath (0.00s)
+=== RUN   TestParseFlagsNoArch
+flag provided but not defined: -test.testlogfile
+Usage of test:
+  -cache-dir string
+    	cache directory (default ".cache/package-statistics")
+  -cache-ttl duration
+    	cache TTL (default 24h0m0s)
+  -download-timeout duration
+    	download timeout (0 = no timeout) (default 10m0s)
+  -force-refresh
+    	force refresh cache
+  -help
+    	show help
+  -top int
+    	number of top packages (default 10)
+Usage of /tmp/go-build217665766/b208/app.test:
+  -cache-dir string
+    	cache directory (default ".cache/package-statistics")
+  -cache-ttl duration
+    	cache TTL (default 24h0m0s)
+  -download-timeout duration
+    	download timeout (0 = no timeout) (default 10m0s)
+  -force-refresh
+    	force refresh cache
+  -help
+    	show help
+  -top int
+    	number of top packages (default 10)
+--- PASS: TestParseFlagsNoArch (0.00s)
+=== RUN   TestDownload
+2025/09/10 00:08:10 Starting download from http://127.0.0.1:41317
+2025/09/10 00:08:10 Downloading 59 bytes (0.0 MB)
+[██████████████████████████████████████████████████] 100.00% (0.0/0.0 MB, 3.6 MB/s, ETA: 0s)2025/09/10 00:08:10 Download completed
+--- PASS: TestDownload (0.03s)
+=== RUN   TestDownloadNotModified
+2025/09/10 00:08:10 Using cached data
+--- PASS: TestDownloadNotModified (0.00s)
+=== RUN   TestCacheHit
+2025/09/10 00:08:10 Using recent cached data (age=0s)
+--- PASS: TestCacheHit (0.00s)
+=== RUN   TestNewApp
+--- PASS: TestNewApp (0.00s)
+=== RUN   TestDownloadSuccess
+2025/09/10 00:08:10 Starting download from http://127.0.0.1:36189
+2025/09/10 00:08:10 Downloading 59 bytes (0.0 MB)
+[██████████████████████████████████████████████████] 100.00% (0.0/0.0 MB, 3.9 MB/s, ETA: 0s)2025/09/10 00:08:10 Download completed
+--- PASS: TestDownloadSuccess (0.00s)
+=== RUN   TestDownloadCacheMatch
+2025/09/10 00:08:10 Using cached data
+--- PASS: TestDownloadCacheMatch (0.00s)
+=== RUN   TestDownloadErrors
+2025/09/10 00:08:10 Starting download from http://127.0.0.1:38349
+2025/09/10 00:08:10 Downloading (size unknown)
+2025/09/10 00:08:10 Starting download from http://127.0.0.1:33529
+2025/09/10 00:08:10 Downloading (size unknown)
+--- PASS: TestDownloadErrors (0.00s)
+=== RUN   TestDownloadNetworkFallback
+2025/09/10 00:08:10 HEAD request failed: Head "http://invalid-host.local": dial tcp: lookup invalid-host.local on 10.255.255.254:53: no such host; falling back to GET
+2025/09/10 00:08:10 Starting download from http://invalid-host.local
+2025/09/10 00:08:13 GET request failed, using cache: Get "http://invalid-host.local": dial tcp: lookup invalid-host.local on 10.255.255.254:53: no such host
+--- PASS: TestDownloadNetworkFallback (3.04s)
+=== RUN   TestProcessLine
+--- PASS: TestProcessLine (0.00s)
+=== RUN   TestProcessLineEdgeCases
+--- PASS: TestProcessLineEdgeCases (0.00s)
+=== RUN   TestSortMap
+--- PASS: TestSortMap (0.00s)
+=== RUN   TestPrintTop
+--- PASS: TestPrintTop (0.00s)
+PASS
+coverage: 73.6% of statements
+ok  	github.com/canonical-dev/package_statistics/internal/app	3.087s	coverage: 73.6% of statements
+=== RUN   TestPackageStats
+--- PASS: TestPackageStats (0.00s)
+=== RUN   TestSaveCache
+--- PASS: TestSaveCache (0.01s)
+=== RUN   TestSaveCacheInvalidDir
+--- PASS: TestSaveCacheInvalidDir (0.00s)
+=== RUN   TestLoadCache
+--- PASS: TestLoadCache (0.01s)
+=== RUN   TestLoadCacheExpired
+--- PASS: TestLoadCacheExpired (0.00s)
+=== RUN   TestLoadCacheCorrupt
+--- PASS: TestLoadCacheCorrupt (0.00s)
+=== RUN   TestCleanupStaleLock
+--- PASS: TestCleanupStaleLock (0.00s)
+=== RUN   TestLocks
+--- PASS: TestLocks (0.00s)
+PASS
+coverage: 70.9% of statements
+ok  	github.com/canonical-dev/package_statistics/internal/cache	0.031s	coverage: 70.9% of statements
+=== RUN   TestProgressReader
+--- PASS: TestProgressReader (0.00s)
+=== RUN   TestProgressReaderEOF
+[██████████████████████████████████████████████████] 100.00% (0.0/0.0 MB, 13.7 MB/s, ETA: 0s)
+--- PASS: TestProgressReaderEOF (0.00s)
+=== RUN   TestProgressRender
+Downloading: 0.0 MB downloaded (0.0 MB/s)--- PASS: TestProgressRender (0.00s)
+=== RUN   TestProgressError
+--- PASS: TestProgressError (0.00s)
+PASS
+coverage: 89.3% of statements
+ok  	github.com/canonical-dev/package_statistics/internal/progress	0.005s	coverage: 89.3% of statements
