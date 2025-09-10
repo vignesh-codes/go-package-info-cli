@@ -8,6 +8,7 @@ A command-line tool that analyzes Debian package statistics by downloading and p
 - Retry + timeout for downloads
 - Progress bar for large files
 - Extensible clean architecture
+- Added makefile to perform install, build, test, lint, vet, scan (for vuln), fmt
 
 
 # Thought Process and Approach
@@ -109,8 +110,8 @@ Then run the following commands to build the binary and run the tests, lint, vet
 
 ```bash
 $ make install
-$ make build
 $ make ci
+$ make build
 ```
 
 ```bash
