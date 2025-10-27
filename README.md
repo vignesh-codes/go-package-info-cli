@@ -1,6 +1,46 @@
 # Package Statistics
 
-A command-line tool that analyzes Debian package statistics by downloading and parsing Contents files from Debian repositories.
+A command-line tool that analyzes Debian package statistics by downloading and parsing Contents files from Debian repositories. It outputs the top 10 packages that have the most files associated with them. 
+
+## Example Output
+
+```bash
+$ ./build/package_statistics arm64
+2025/09/10 00:04:55 Starting download from http://ftp.uk.debian.org/debian/dists/stable/main/Contents-arm64.gz
+2025/09/10 00:04:55 Downloading 12554723 bytes (12.0 MB)
+[██████████████████████████████████████████████████] 100.00% (12.0/12.0 MB, 3.4 MB/s, ETA: 0s)2025/09/10 00:04:58 Download completed
+Rank  Package Name                   Count
+--------------------------------------------------
+1     devel/piglit                             54424
+2     math/acl2-books                          20287
+3     science/esys-particle                    18127
+4     libdevel/libboost1.88-dev                16001
+5     libdevel/libboost1.83-dev                15662
+6     lisp/racket                              12202
+7     libdevel/libstarpu-dev                   9652
+8     libdevel/libtorch-dev                    8672
+9     net/zoneminder                           8161
+10    kernel/linux-headers-6.12.43+deb13-arm64 7476
+```
+
+And when the cache exists
+```bash
+/canonical$ ./build/package_statistics  arm64
+2025/09/10 01:12:00 Using recent cached data (age=29m22s)
+Rank  Package Name                   Count
+--------------------------------------------------
+1     devel/piglit                             54424
+2     math/acl2-books                          20287
+3     science/esys-particle                    18127
+4     libdevel/libboost1.88-dev                16001
+5     libdevel/libboost1.83-dev                15662
+6     lisp/racket                              12202
+7     libdevel/libstarpu-dev                   9652
+8     libdevel/libtorch-dev                    8672
+9     net/zoneminder                           8161
+10    kernel/linux-headers-6.12.43+deb13-arm64 7476
+```
+
 
 ## Features
 - Caching with ETag/Last-Modified
@@ -12,13 +52,6 @@ A command-line tool that analyzes Debian package statistics by downloading and p
 
 
 # Thought Process and Approach
-
-I received the mail from Canonical about the technical assessment on Tuesday 8th September 2025 evening EST.
-
-I spent some time to understand the requirement that night. Just playing around with the mirror endpoint and understanding the format of the data.
-
-I started to implement the codes on Wednesday 9th September 2025 morning.
-
 ## Thought Process
 - My first milestone was to get the data from the mirror endpoint and parse the data to get the top packages with the most files. 
 I found it quite straightforward to do them using simple http get request and parsing the data by iterating through the lines and counting the packages.
@@ -147,45 +180,6 @@ Usage of ./build/package_statistics:
         show help
   -top int
         number of top packages (default 10)
-```
-
-## Example Output
-
-```bash
-$ ./build/package_statistics arm64
-2025/09/10 00:04:55 Starting download from http://ftp.uk.debian.org/debian/dists/stable/main/Contents-arm64.gz
-2025/09/10 00:04:55 Downloading 12554723 bytes (12.0 MB)
-[██████████████████████████████████████████████████] 100.00% (12.0/12.0 MB, 3.4 MB/s, ETA: 0s)2025/09/10 00:04:58 Download completed
-Rank  Package Name                   Count
---------------------------------------------------
-1     devel/piglit                             54424
-2     math/acl2-books                          20287
-3     science/esys-particle                    18127
-4     libdevel/libboost1.88-dev                16001
-5     libdevel/libboost1.83-dev                15662
-6     lisp/racket                              12202
-7     libdevel/libstarpu-dev                   9652
-8     libdevel/libtorch-dev                    8672
-9     net/zoneminder                           8161
-10    kernel/linux-headers-6.12.43+deb13-arm64 7476
-```
-
-And when the cache exists
-```bash
-/canonical$ ./build/package_statistics  arm64
-2025/09/10 01:12:00 Using recent cached data (age=29m22s)
-Rank  Package Name                   Count
---------------------------------------------------
-1     devel/piglit                             54424
-2     math/acl2-books                          20287
-3     science/esys-particle                    18127
-4     libdevel/libboost1.88-dev                16001
-5     libdevel/libboost1.83-dev                15662
-6     lisp/racket                              12202
-7     libdevel/libstarpu-dev                   9652
-8     libdevel/libtorch-dev                    8672
-9     net/zoneminder                           8161
-10    kernel/linux-headers-6.12.43+deb13-arm64 7476
 ```
 
 
