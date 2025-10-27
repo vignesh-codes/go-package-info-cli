@@ -31,7 +31,7 @@ func TestParseFlagsNoArch(t *testing.T) {
 	defer func() { flag.CommandLine = old }()
 	flag.CommandLine = fs
 
-	fs.Parse([]string{})
+	_ = fs.Parse([]string{})
 	_, err := parseFlags()
 	if err == nil {
 		t.Fatal("should fail without arch")
@@ -47,7 +47,7 @@ func TestDownload(t *testing.T) {
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("ETag", "test-etag")
-		w.Write(buf.Bytes())
+		_, _ = w.Write(buf.Bytes())
 	}))
 	defer server.Close()
 
@@ -101,7 +101,7 @@ func TestCacheHit(t *testing.T) {
 	}
 
 	cacheFile := fmt.Sprintf("%s/contents-amd64.json", tempDir)
-	cache.SaveCache(cacheFile, entry)
+	_ = cache.SaveCache(cacheFile, entry)
 
 	app := NewApp(&Config{
 		Architecture:     "amd64",

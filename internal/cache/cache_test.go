@@ -48,7 +48,7 @@ func TestLoadCache(t *testing.T) {
 		Timestamp:    time.Now().UTC(),
 	}
 
-	SaveCache(cacheFile, entry)
+	_ = SaveCache(cacheFile, entry)
 	loaded, err := LoadCache(cacheFile, time.Hour)
 
 	if err != nil {
@@ -67,7 +67,7 @@ func TestLoadCacheExpired(t *testing.T) {
 		Timestamp:    time.Now().UTC().Add(-2 * time.Hour),
 	}
 
-	SaveCache(cacheFile, entry)
+	_ = SaveCache(cacheFile, entry)
 	_, err := LoadCache(cacheFile, time.Hour)
 
 	if err == nil || !strings.Contains(err.Error(), "expired") {
@@ -77,7 +77,7 @@ func TestLoadCacheExpired(t *testing.T) {
 
 func TestLoadCacheCorrupt(t *testing.T) {
 	cacheFile := filepath.Join(t.TempDir(), "corrupt.json")
-	os.WriteFile(cacheFile, []byte("invalid json"), 0644)
+	_ = os.WriteFile(cacheFile, []byte("invalid json"), 0644)
 
 	_, err := LoadCache(cacheFile, time.Hour)
 	if err == nil {
@@ -87,10 +87,10 @@ func TestLoadCacheCorrupt(t *testing.T) {
 
 func TestCleanupStaleLock(t *testing.T) {
 	lockFile := filepath.Join(t.TempDir(), "test.lock")
-	os.WriteFile(lockFile, []byte("lock"), 0644)
+	_ = os.WriteFile(lockFile, []byte("lock"), 0644)
 
 	oldTime := time.Now().Add(-2 * time.Hour)
-	os.Chtimes(lockFile, oldTime, oldTime)
+	_ = os.Chtimes(lockFile, oldTime, oldTime)
 
 	CleanupStaleLock(lockFile, time.Hour)
 

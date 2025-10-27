@@ -66,7 +66,7 @@ func TestPrintTop(t *testing.T) {
 	w.Close()
 
 	var buf bytes.Buffer
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	output := buf.String()
 
 	if !strings.Contains(output, "pkg1") {

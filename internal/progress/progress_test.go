@@ -34,7 +34,7 @@ func TestProgressReaderEOF(t *testing.T) {
 	}
 
 	buf := make([]byte, 4)
-	pr.Read(buf)
+	_, _ = pr.Read(buf)
 
 	buf = make([]byte, 10)
 	n, err := pr.Read(buf)
