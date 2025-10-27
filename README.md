@@ -298,7 +298,3 @@ PrintTop(sorted stats, top count)
 - More scenario based tests
 - Add tests on github CI to test on different architectures and different versions of the program.
 - Benchmark testing (for downloading with huge data and low bandwidth, unstable network etc)
-
-## Development Time
-
-Total Time Spent: around 5 hours (including testing and cleaning and documentation took about 2 hours for these)
