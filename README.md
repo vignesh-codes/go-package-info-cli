@@ -25,7 +25,7 @@ Rank  Package Name                   Count
 
 And when the cache exists
 ```bash
-/canonical$ ./build/package_statistics  arm64
+$ ./build/package_statistics  arm64
 2025/09/10 01:12:00 Using recent cached data (age=29m22s)
 Rank  Package Name                   Count
 --------------------------------------------------
@@ -195,7 +195,7 @@ I also did some manual testing on the count of files per package by outputting t
 ## Folder Structure
 
 ```bash
-/canonical$ tree .
+$ tree .
 .          
 ├── Makefile
 ├── README.md
